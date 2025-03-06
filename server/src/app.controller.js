@@ -8,6 +8,8 @@ import {rateLimit} from "express-rate-limit";
 // import commentRouter from "./modules/comment/comment.controller.js";
 
 const bootstrap = async (app, express) => {
+    // cors
+    app.use(cors("*"));
     // rate limit
     app.use(rateLimit({
         windowMs: 3 * 60 * 1000,

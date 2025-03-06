@@ -4,14 +4,22 @@ import * as constants from "../../utils/general/constants.js"
 // schema
 const userSchema = new Schema({
     firstName: {type: String, required: true, maxlength: 50, trim: true},
-    lastName: {type: String, required: true, maxlength: 50, trim: true},
+    lastName: {type: String, required: function () {
+        return this.provider == constants.providers.SYSTEM ? true : false;
+    }, maxlength: 50, trim: true},
     email: {type: String, required: true, unique: [true, "email already exist"], lowercase: true},
-    password: {type: String, required: true},
-    mobileNumber: {type: String, required: true, unique: true},
+    password: {type: String, required: function () {
+        return this.provider == constants.providers.SYSTEM ? true : false;
+    }},
+    mobileNumber: {type: String, required: function () {
+        return this.provider == constants.providers.SYSTEM ? true : false;
+    }, unique: true},
     provider: {type: String, enum: Object.values(constants.providers), default: constants.providers.SYSTEM},
     role: {type: String, enum: Object.values(constants.roles), default: constants.roles.USER},
     gender: {type: String, enum: Object.values(constants.genders), default: constants.genders.USER},
-    DOB: {type: Date, required: true, validate: [
+    DOB: {type: Date, required: function () {
+        return this.provider == constants.providers.SYSTEM ? true : false;
+    }, validate: [
         { validator: function (value) {
             // ensures DOB is before current date
             const today = new Date();
