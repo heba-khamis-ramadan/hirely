@@ -1,5 +1,6 @@
-import { defaultPublicId, defaultSecureURL, User } from "../../db/models/user.model.js";
+import { User } from "../../db/models/user.model.js";
 import { decrypt, encrypt } from "../../utils/crypto/index.js";
+import * as constants from "../../utils/general/constants.js"
 import { messages } from "../../utils/messages/index.js";
 import cloudinary from "../../utils/file upload/cloud_config.js";
 
@@ -55,7 +56,7 @@ export const update_password = async (req, res, next) => {
 
 export const upload_profile_pic_cloud = async (req, res, next) => {
     //delete old pic
-    if(req.authUser.profilePic.public_id != defaultPublicId) {
+    if(req.authUser.profilePic.public_id != constants.defaultPublicId) {
         await cloudinary.uploader.destroy(req.authUser.profilePic.public_id);
     };
     // upload to cloud
@@ -72,12 +73,12 @@ export const upload_profile_pic_cloud = async (req, res, next) => {
 
 export const delete_profile_pic_cloud = async (req, res, next) => {
     //delete profile pic
-    if(req.authUser.profilePic.public_id != defaultPublicId) {
+    if(req.authUser.profilePic.public_id != constants.defaultPublicId) {
         await cloudinary.uploader.destroy(req.authUser.profilePic.public_id);
     };
     //update with the default pic
     const result = await User.findByIdAndUpdate(req.authUser.id, 
-        {profilePic: {secure_url: defaultSecureURL, public_id: defaultPublicId}}, 
+        {profilePic: {secure_url: constants.defaultSecureURL, public_id: constants.defaultPublicId}}, 
         {new: true});
     // send response
     return res.status(200).json({success: true, message: messages.user.updatedSuccessfully}); 
@@ -85,7 +86,7 @@ export const delete_profile_pic_cloud = async (req, res, next) => {
 
 export const upload_cover_pic_cloud = async (req, res, next) => {
     //delete old pic
-    if(req.authUser.coverPic.public_id != defaultPublicId) {
+    if(req.authUser.coverPic.public_id != constants.defaultPublicId) {
         await cloudinary.uploader.destroy(req.authUser.coverPic.public_id);
     };
     // upload to cloud
@@ -102,12 +103,12 @@ export const upload_cover_pic_cloud = async (req, res, next) => {
 
 export const delete_cover_pic_cloud = async (req, res, next) => {
     //delete cover pic
-    if(req.authUser.coverPic.public_id != defaultPublicId) {
+    if(req.authUser.coverPic.public_id != constants.defaultPublicId) {
         await cloudinary.uploader.destroy(req.authUser.coverPic.public_id);
     };
     //update with the default pic
     const result = await User.findByIdAndUpdate(req.authUser.id, 
-        {coverPic: {secure_url: defaultSecureURL, public_id: defaultPublicId}}, 
+        {coverPic: {secure_url: constants.defaultSecureURL, public_id: constants.defaultPublicId}}, 
         {new: true});
     // send response
     return res.status(200).json({success: true, message: messages.user.updatedSuccessfully, data: result}); 

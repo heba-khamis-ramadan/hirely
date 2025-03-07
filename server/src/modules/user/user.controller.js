@@ -16,7 +16,7 @@ router.post("/", isAuthenticated,
 // get loggedin user data
 router.get("/", isAuthenticated, asyncHandler(userService.get_user));
 // get user profile by email
-router.get("/by-name", isAuthenticated, 
+router.get("/by-email", isAuthenticated, 
     isValid(userValidation.get_user_profile), 
     asyncHandler(userService.get_user_profile));
 // update user password
@@ -29,14 +29,18 @@ router.post("/profile-pic",
     cloudUpload(fileValidation.images).single("image"),
     asyncHandler(userService.upload_profile_pic_cloud));
 // delete profile pic - cloud
-router.delete("/profile-pic", isAuthenticated, asyncHandler(userService.delete_profile_pic_cloud));
+router.delete("/profile-pic", 
+    isAuthenticated, 
+    asyncHandler(userService.delete_profile_pic_cloud));
 // upload cover pic - cloud
 router.post("/cover-pic", 
     isAuthenticated, 
     cloudUpload(fileValidation.images).single("image"),
     asyncHandler(userService.upload_cover_pic_cloud));
 // delete cover pic - cloud
-router.delete("/cover-pic", isAuthenticated, asyncHandler(userService.delete_cover_pic_cloud));
+router.delete("/cover-pic", 
+    isAuthenticated, 
+    asyncHandler(userService.delete_cover_pic_cloud));
 // delete user
 router.delete("/", isAuthenticated, asyncHandler(userService.delete_user));
 
