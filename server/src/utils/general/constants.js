@@ -49,5 +49,5 @@ export const status = {
 };
 
 // media
-export const defaultSecureURL= "https://res.cloudinary.com/dncl2sqt9/image/upload/v1738942169/default_ufqipq.png";
-export const defaultPublicId= "default_ufqipq";
+export const defaultSecureURL= "https://res.cloudinary.com/dncl2sqt9/image/upload/v1741300543/default_nowu2e.png";
+export const defaultPublicId= "default_nowu2e";

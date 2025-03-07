@@ -1,6 +1,6 @@
 import { User } from "../../db/models/user.model.js";
 import { sendEmail } from "../../utils/email/send_email.js";
-import { compare, hash, encrypt, generate, messages  } from "../../utils/index.js";
+import { compare, hash, generate, messages  } from "../../utils/index.js";
 import { generateOTP } from "../../utils/otp/generate.js";
 import * as constants from "../../utils/general/constants.js";
 import {OAuth2Client} from "google-auth-library";
@@ -18,9 +18,9 @@ export const signup = async (req, res, next) => {
         firstName,
         lastName,
         email, 
-        password: hash({password}),
+        password,
         OTP: [{code:hash({otp}), codeType: constants.otpTypes.confirmEmail, expiresIn: otpExpiry}],
-        mobileNumber: encrypt({data: mobileNumber}),
+        mobileNumber,
         role,
         gender,
         DOB
@@ -63,8 +63,7 @@ export const login = async (req, res, next) => {
         return next(new Error("please confirm your account first!", {cause: 404}));
     }; 
     // check password
-    const passwordMatch = compare({password, hashedPasword: user.password});
-    if (!passwordMatch) {
+    if (!password == user.password) {
         return next(new Error(messages.user.invalidPassword, {cause: 404}));
     };
     // change isDeleted back to false
@@ -176,10 +175,8 @@ export const reset = async (req, res, next) => {
     if (user.OTP.codeType !== constants.otpTypes.forgetPassword || !otpMatch || user.OTP.expiresIn < Date.now()) {
         return next(new Error("Invalid or expired OTP", {cause: 400}));
     }
-    // update user as confirmed
-    const updateUser = await User.updateOne(
-        {email},
-        { $set: { password } });
+    // update user password
+    user.password = password;
     await user.save();
-    res.status(200).json({ message: "password updated successfully!" });   
+    return res.status(200).json({success: true, message: messages.user.updatedSuccessfully});    
 };

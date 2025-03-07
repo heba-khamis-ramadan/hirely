@@ -1,5 +1,6 @@
 import { Schema, Types, model } from "mongoose";
 import * as constants from "../../utils/general/constants.js"
+import { hash, encrypt, decrypt  } from "../../utils/index.js";
 
 // schema
 const userSchema = new Schema({
@@ -55,6 +56,9 @@ const userSchema = new Schema({
          },
     profilePic: { type: {secure_url: {type: String, default: constants.defaultSecureURL}, 
                   public_id: {type: String, default: constants.defaultPublicId}}
+                },
+    coverPic: { type: {secure_url: {type: String, default: constants.defaultSecureURL}, 
+                  public_id: {type: String, default: constants.defaultPublicId}}
                 }
 }, {
     timestamps: true,
@@ -65,6 +69,31 @@ const userSchema = new Schema({
 // virtuals
 userSchema.virtual("username").get(function () {
     return `${this.firstName} ${this.lastName}`;
+  });
+
+// hash password and encrypt phone number before saving
+userSchema.pre('save', function (next) {
+    if (this.isModified('password')) {
+      this.password = hash(this.password);
+    }
+    if (this.isModified('mobileNumber')) {
+        this.mobileNumber = encrypt(this.mobileNumber);
+      }
+    next();
+  });
+
+// decrypt phone number when retrieving
+userSchema.set('toJSON', {
+    transform: function (doc, ret) {
+      if (ret.mobileNumber) {
+        try {
+          ret.mobileNumber = decrypt(ret.mobileNumber);
+        } catch (error) {
+          console.error('Error decrypting mobileNumber:', error);
+        }
+      }
+      return ret;
+    }
   });
 
 // model
