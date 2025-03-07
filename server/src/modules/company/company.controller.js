@@ -18,8 +18,11 @@ router.post("/", isAuthenticated,
     isValid(companyValidation.update_company),
     asyncHandler(companyService.update_company));
 // delete company
-router.delete("/", isAuthenticated, asyncHandler(companyService.delete_company));
-// get company profile by id
+router.delete("/:companyId", 
+    isAuthenticated,
+    isValid(companyValidation.delete_company),  
+    asyncHandler(companyService.delete_company));
+// get company jobs by id
 router.get("/:companyId", isAuthenticated, 
     isValid(companyValidation.get_company_jobs), 
     asyncHandler(companyService.get_company_jobs));
@@ -31,11 +34,11 @@ router.get("/by-name", isAuthenticated,
 router.post("/company-logo", 
     isAuthenticated, 
     cloudUpload(fileValidation.images).single("image"),
-    asyncHandler(companyService.upload_company_logo_cloud));
+    asyncHandler(companyService.upload_logo_cloud));
 // delete company logo - cloud
 router.delete("/company-logo", 
     isAuthenticated, 
-    asyncHandler(companyService.delete_company_logo_cloud));
+    asyncHandler(companyService.delete_logo_cloud));
 // upload cover pic - cloud
 router.post("/cover-pic", 
     isAuthenticated, 

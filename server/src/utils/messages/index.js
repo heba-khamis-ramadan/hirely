@@ -18,6 +18,7 @@ export const messages = {
            loggedIn: "logged in successfully :)", 
            loggedIn: "logged out successfully :)"},
     email: {...generateMessage("email")},
-    post: {...generateMessage("post")},
-    comment: {...generateMessage("comment")}
+    company: {...generateMessage("company")},
+    job: {...generateMessage("job")},
+    application: {...generateMessage("application")}
 }

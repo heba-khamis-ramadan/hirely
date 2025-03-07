@@ -38,7 +38,15 @@ const companySchema = new Schema({
     isBanned: {type: Boolean, default: false},
     updatedBy: {type: Types.ObjectId, ref: "User"},
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true }, 
+    toObject: { virtuals: true }
+});
+
+companySchema.virtual("jobs", {
+  ref: "Job",
+  localField: "_id",
+  foreignField: "companyId"
 });
 
 // model
