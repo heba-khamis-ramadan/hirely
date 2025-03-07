@@ -4,7 +4,7 @@ import { Schema, Types, model } from "mongoose";
 const companySchema = new Schema({
     companyName: {type: String, required: true, maxlength: 50, trim: true, unique: [true, "company already exist"]},
     description: {type: String, required: true},
-    industry: {type: String, required: true},
+    industry: {type: String},
     address: {type: String},
     numberOfEmployees: { type: [Number],
         validate: [
