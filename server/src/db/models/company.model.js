@@ -36,7 +36,7 @@ const companySchema = new Schema({
     isDeleted: {type: Boolean, default: false},
     bannedAt: {type: Date},
     isBanned: {type: Boolean, default: false},
-    updatedBy: {type: Types.ObjectId, ref: "User"},
+    updatedBy: {type: Types.ObjectId, ref: "User"}
 }, {
     timestamps: true,
     toJSON: { virtuals: true }, 

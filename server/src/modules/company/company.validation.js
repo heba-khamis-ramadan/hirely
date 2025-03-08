@@ -33,9 +33,11 @@ export const update_company = joi.object({
 export const delete_company = joi.object({
     companyId: joi.custom(isValidId).required()
 }).required();
+
 export const get_company_jobs = joi.object({
     id: joi.custom(isValidId).required()
 }).required();
+
 export const get_company_profile = joi.object({
     companyName: joi.string()
 }).required();
