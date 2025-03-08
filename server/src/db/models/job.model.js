@@ -15,8 +15,16 @@ const jobSchema = new Schema({
     companyId: {type: Types.ObjectId, ref: "Company", required: true},
     closed: {type: Boolean, default: false},
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true }, 
+    toObject: { virtuals: true }
 });
+
+companySchema.virtual("applications", {
+    ref: "Application",
+    localField: "_id",
+    foreignField: "jopId"
+  });
 
 // model
 export const Job = model("Job", jobSchema);

@@ -3,8 +3,8 @@ import * as constants from "../../utils/general/constants.js"
 
 // schema
 const applicationSchema = new Schema({
-    jopId: {type: Types.ObjectId, ref: "Job", required: true},
-    userBy: {type: Types.ObjectId, ref: "User", required: true},
+    jobId: {type: Types.ObjectId, ref: "Job", required: true},
+    userId: {type: Types.ObjectId, ref: "User", required: true},
     userCV: { type : {secure_url: {type: String, required: true},
               public_id: {type: String, required: true}}, 
               required: true

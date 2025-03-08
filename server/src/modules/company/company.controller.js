@@ -6,8 +6,12 @@ import { asyncHandler } from "../../utils/index.js";
 import { fileValidation } from "../../utils/file upload/multer_cloud.js";
 import { isValid } from "../../middlewares/validation.middleware.js";
 import { cloudUpload } from "../../utils/file upload/multer_cloud.js";
+import jobRouter from "../job/job.controller.js";
 
 const router = Router();
+
+//jobs router
+app.use("/:companyId/jobs", jobRouter);
 
 // add company
 router.post("/", isAuthenticated, 

@@ -2,10 +2,12 @@ import { Router } from "express";
 import * as jobService from "./job.service.js"
 import * as jobValidation from "./job.validation.js"
 import { isAuthenticated } from "../../middlewares/auth.middleware.js";
+import { isAuthorized } from "../../middlewares/authorization.middleware.js";
 import { asyncHandler } from "../../utils/index.js";
 import { isValid } from "../../middlewares/validation.middleware.js";
+import { roles } from "../../utils/general/constants.js"
 
-const router = Router();
+const router = Router({mergeParams: true});
 
 // add job
 router.post("/", isAuthenticated, 
@@ -26,8 +28,8 @@ router.get("/applications/:jobId", isAuthenticated,
     asyncHandler(jobService.get_job_applications));
 // accept or reject application for a job by jobId
 router.post("/applications/:jobId", isAuthenticated,
-    isValid(jobValidation.get_job_applications), 
-    asyncHandler(jobService.get_job_applications));
+    isValid(jobValidation.accept_reject_job_applications), 
+    asyncHandler(jobService.accept_reject_job_applications));
 // get jobs by id
 router.get("/:jobId?", isAuthenticated, 
     isValid(jobValidation.get_job), 
@@ -37,7 +39,8 @@ router.get("/", isAuthenticated,
     isValid(jobValidation.get_job_filter), 
     asyncHandler(jobService.get_job_filter));
 // apply to a job
-router.post("/apply/:jobId", isAuthenticated, 
+router.post("/apply/:jobId", isAuthenticated,
+    isAuthorized(roles.USER),
     isValid(jobValidation.apply_job),
     asyncHandler(jobService.apply_job));
 

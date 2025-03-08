@@ -4,7 +4,6 @@ import {rateLimit} from "express-rate-limit";
 // import adminRouter from "./modules/admin/admin.controller.js";
 import authRouter from "./modules/auth/auth.controller.js";
 import userRouter from "./modules/user/user.controller.js";
-import jobRouter from "./modules/job/job.controller.js";
 import companyRouter from "./modules/company/company.controller.js";
 
 const bootstrap = async (app, express) => {
@@ -35,8 +34,6 @@ const bootstrap = async (app, express) => {
     app.use("/auth", authRouter);
     //users
     app.use("/users", userRouter);
-    //jobs
-    app.use("/users", jobRouter);
     //companies
     app.use("/companies", companyRouter);
 

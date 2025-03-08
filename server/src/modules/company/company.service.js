@@ -23,7 +23,7 @@ export const add_company = async (req, res, next) => {
     let legalAttachment = {};
     if(req.file) {
         const {secure_url, public_id} = await cloudinary.uploader.upload(req.file.path,
-            {folder: `hirely/users/${companyName}/attachments`}
+            {folder: `hirely/companies/${userExistance.id}/${companyName}/attachments`}
         );
         legalAttachment = {secure_url, public_id};
     };
@@ -118,7 +118,7 @@ export const upload_cover_pic_cloud = async (req, res, next) => {
     // upload to cloud
     const {secure_url, public_id} = await cloudinary.uploader.upload(
         req.file.path, 
-        {folder: `hirely/users/${company.coverPic}/cover-pic`});
+        {folder: `hirely/companies/${userExistance.id}/${company.companyName}/cover-pic`});
     // update database
     company.coverPic = {secure_url, public_id};
     const result = await company.save();
@@ -151,7 +151,7 @@ export const upload_logo_cloud = async (req, res, next) => {
     // upload to cloud
     const {secure_url, public_id} = await cloudinary.uploader.upload(
         req.file.path, 
-        {folder: `hirely/users/${company.logo}/logo`});
+        {folder: `hirely/companies/${userExistance.id}/${company.companyName}/logo`});
     // update database
     company.logo = {secure_url, public_id};
     const result = await company.save();
