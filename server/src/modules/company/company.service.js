@@ -76,7 +76,7 @@ export const delete_company = async (req, res, next) => {
     const userExistance = req.authUser;
     const {companyId} = req.params
     const company = await Company.findById(companyId);
-    if(userExistance.role != constants.roles.ADMIN || company.createdBy != userExistance.id) {
+    if(userExistance.role != constants.roles.ADMIN || company.createdBy.toString() != userExistance.id.toString()) {
         return next(new Error("not authurized", {cause: 401}));  
     };
     // soft delete the company

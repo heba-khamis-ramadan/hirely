@@ -9,7 +9,10 @@ const applicationSchema = new Schema({
               public_id: {type: String, required: true}}, 
               required: true
             },
-    status: {type: String, required: true, enum: Object.values(constants.status), default: constants.status.PENDING},
+    status: {type: String, 
+        required: true, 
+        enum: Object.values(constants.status), 
+        default: constants.status.PENDING},
 }, {
     timestamps: true
 });

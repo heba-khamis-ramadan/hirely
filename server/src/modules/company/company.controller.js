@@ -14,7 +14,7 @@ router.post("/", isAuthenticated,
     isValid(companyValidation.add_company), 
     asyncHandler(companyService.add_company));
 // update company
-router.post("/", isAuthenticated, 
+router.put("/", isAuthenticated, 
     isValid(companyValidation.update_company),
     asyncHandler(companyService.update_company));
 // delete company
