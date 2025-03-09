@@ -13,7 +13,7 @@ const jobSchema = new Schema({
     addedBy: {type: Types.ObjectId, ref: "User", required: true},
     updatedBy: {type: Types.ObjectId, ref: "User"},
     companyId: {type: Types.ObjectId, ref: "Company", required: true},
-    closed: {type: Boolean, default: false},
+    closed: {type: Boolean, default: false}
 }, {
     timestamps: true,
     toJSON: { virtuals: true }, 

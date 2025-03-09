@@ -26,10 +26,6 @@ router.delete("/:jobId",
 router.get("/applications/:jobId", isAuthenticated,
     isValid(jobValidation.get_job_applications), 
     asyncHandler(jobService.get_job_applications));
-// accept or reject application for a job by jobId
-router.post("/applications/:jobId", isAuthenticated,
-    isValid(jobValidation.accept_reject_job_applications), 
-    asyncHandler(jobService.accept_reject_job_applications));
 // get jobs by id
 router.get("/:jobId?", isAuthenticated, 
     isValid(jobValidation.get_job), 

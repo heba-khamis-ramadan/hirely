@@ -67,14 +67,14 @@ export const update_job = async (req, res, next) => {
     }; 
     // update job
         job.jobTitle = jobTitle;
-        jop.jobLocation = jobLocation;
-        jop.workingTime = workingTime;
-        jop.seniorityLevel = seniorityLevel;
-        jop.jobDescription = jobDescription;
-        jop.technicalSkills = technicalSkills;
-        jop.softSkills = softSkills;
-        jop.updatedBy =  userExistance.id;
-        jop.closed = closed;
+        job.jobLocation = jobLocation;
+        job.workingTime = workingTime;
+        job.seniorityLevel = seniorityLevel;
+        job.jobDescription = jobDescription;
+        job.technicalSkills = technicalSkills;
+        job.softSkills = softSkills;
+        job.updatedBy =  userExistance.id;
+        job.closed = closed;
 
         const result = await job.save();
 
@@ -132,10 +132,9 @@ export const get_job = async (req, res, next) => {
 
 export const get_job_filter = async (req, res, next) => {
     // get data from req
-    const {jobId, companyId} = req.params;
     const { workingTime, 
         jobLocation, 
-        seniorityLevel, 
+        seniorityLevel,
         jobTitle, 
         technicalSkills,
         softSkills,
