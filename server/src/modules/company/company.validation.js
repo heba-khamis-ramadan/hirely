@@ -41,3 +41,12 @@ export const get_company_jobs = joi.object({
 export const get_company_profile = joi.object({
     companyName: joi.string()
 }).required();
+
+export const ban_company = joi.object({
+    companyId: joi.custom(isValidId).required(),
+    isBanned: joi.boolean()
+}).required();
+
+export const approve_company = joi.object({
+    companyId: joi.custom(isValidId).required()
+}).required();

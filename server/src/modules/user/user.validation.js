@@ -17,3 +17,8 @@ export const update_password = joi.object({
 export const get_user_profile = joi.object({
     email: joi.string().email().required()
 }).required();
+
+export const ban_user = joi.object({
+    userId: joi.custom(isValidId).required(),
+    isBanned: joi.boolean()
+}).required();
