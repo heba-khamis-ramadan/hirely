@@ -2,7 +2,7 @@ import connectDB from "./db/db.connection.js";
 import { globalError, notFound } from "./utils/index.js";
 import {rateLimit} from "express-rate-limit";
 import { createHandler } from "graphql-http/lib/use/express";
-// import adminRouter from "./modules/admin/admin.controller.js";
+import cors from "cors";
 import authRouter from "./modules/auth/auth.controller.js";
 import userRouter from "./modules/user/user.controller.js";
 import companyRouter from "./modules/company/company.controller.js";

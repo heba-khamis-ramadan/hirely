@@ -20,7 +20,7 @@ const jobSchema = new Schema({
     toObject: { virtuals: true }
 });
 
-companySchema.virtual("applications", {
+jobSchema.virtual("applications", {
     ref: "Application",
     localField: "_id",
     foreignField: "jopId"

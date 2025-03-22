@@ -11,7 +11,7 @@ import jobRouter from "../job/job.controller.js";
 const router = Router();
 
 //jobs router
-app.use("/:companyId/jobs", jobRouter);
+router.use("/:companyId/jobs", jobRouter);
 
 // add company
 router.post("/", isAuthenticated, 

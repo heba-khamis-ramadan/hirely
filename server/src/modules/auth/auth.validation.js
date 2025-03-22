@@ -1,5 +1,5 @@
 import joi from "joi";
-import { genders, roles } from "../../db/models/user.model.js";
+import { genders, roles } from "../../utils/general/constants.js";
 
 export const signup = joi.object({
     firstName: joi.string().min(2).max(50).required(),

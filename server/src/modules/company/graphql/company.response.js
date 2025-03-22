@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLObjectType } from "graphql";
-import { companyType } from "./company.type";
+import { companyType } from "./company.type.js";
 
 export const getCompaniesResponse = new GraphQLObjectType({
     name: "getCompaniesResponse",

@@ -1,4 +1,5 @@
 import { Schema, Types, model } from "mongoose";
+import { defaultSecureURL, defaultPublicId } from "../../utils/general/constants.js";
 
 // schema
 const companySchema = new Schema({
@@ -20,11 +21,11 @@ const companySchema = new Schema({
       },
     companyEmail: {type: String, required: true, unique: [true, "email already exist"], lowercase: true},
     createdBy: {type: Types.ObjectId, ref: "User", required: true},
-    logo: { type: {secure_url: {type: String, default: constants.defaultSecureURL}, 
-                   public_id: {type: String, default: constants.defaultPublicId}}
+    logo: { type: {secure_url: {type: String, default: defaultSecureURL}, 
+                   public_id: {type: String, default: defaultPublicId}}
                 },
-    coverPic: { type: {secure_url: {type: String, default: constants.defaultSecureURL}, 
-                       public_id: {type: String, default: constants.defaultPublicId}}
+    coverPic: { type: {secure_url: {type: String, default: defaultSecureURL}, 
+                       public_id: {type: String, default: defaultPublicId}}
                 },
     HRs: {type: [Types.ObjectId], ref: "User", required: true, minlength: 1},
     legalAttachment: { type: {secure_url: {type: String, required: true}, 

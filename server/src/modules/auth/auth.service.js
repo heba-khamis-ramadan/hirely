@@ -1,7 +1,6 @@
 import { User } from "../../db/models/user.model.js";
 import { sendEmail } from "../../utils/email/send_email.js";
-import { compare, hash, generate, messages  } from "../../utils/index.js";
-import { generateOTP } from "../../utils/otp/generate.js";
+import { compare, hash, generate, messages, generateOTP  } from "../../utils/index.js";
 import * as constants from "../../utils/general/constants.js";
 import {OAuth2Client} from "google-auth-library";
 

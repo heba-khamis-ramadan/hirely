@@ -1,4 +1,6 @@
 import joi from "joi";
+import { genders } from "../../utils/general/constants.js";
+import { isValidId } from "../../middlewares/validation.middleware.js";
 
 export const update_user = joi.object({
     firstName: joi.string().min(2).max(50).required(),
